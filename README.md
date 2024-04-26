@@ -10,9 +10,9 @@
     Renjing Xu<sup>†</sup>,
     Lin Wang<sup>†</sup>
   </p>
-<!--   <p align="center" >
-    <em>The Hong Kong University of Science and Technology (Guangzhou)</em> 
-  </p> -->
+  <p align="center" >
+    <em>HKUST(GZ) & HKUST</em> 
+  </p>
   <p align="center">
     <a href='https://arxiv.org/abs/2309.09297'>
       <img src='https://img.shields.io/badge/Paper-PDF-red?style=flat&logo=arXiv&logoColor=red' alt='Paper PDF'>
@@ -66,6 +66,61 @@ CUDA_VISIBLE_DEVICES=0 python train_eyolo.py \
      --fusion_method SREF\
      --use_wandb   
 ```
+
+
+
+## Dataset Preparation
+### Download VOC 2007 & 2012 dataset
+```shell
+# Please specify a directory for dataset to be downloaded into, else default is ~/data/
+sh data/scripts/VOC2007.sh
+sh data/scripts/VOC2012.sh
+```
+
+
+## Event-based Dataset Generation
+</p>
+<p align="center">
+  <img src="figs/event2frame.png" alt="Logo" width="50%">
+</p>
+
+To obtain paired event data, we propose a novel event frame synthesis method that generates event frames by the randomized optical flow and luminance gradients. **Only a single RGB/HDR image is required to generate the corresponding event frames.**
+
+You can easily generate E-VOC dataset by 
+
+```shell
+python event2frame.py
+```
+The resulting dataset will have the following data structure:
+
+``` graphql
+VOC2007
+|---Event                      ## Raw Event (.npy)
+   |---{event_type}, e.g.,'Underexposure_0.2_random42'
+       |---XXXX.npy
+       |...
+|---EventFrameImages           ## Event Frame (.jpg)
+    |---{event_type}
+       |---XXXX.jpg
+       |...
+|---ExposureImages             ## Exposure RGB image for visulization (.jpg), clip into [0,255] from HDR image
+    |---{event_type}
+       |---XXXX.jpg
+       |...
+|---HDRImages                  ## Exposure Images (.exr)
+    |---{event_type}
+       |---XXXX.exr
+       |...
+|---Annotations                
+|---JPEGImages
+|---ImageSets
+|---SegmentationClass
+|---SegmentationObject
+```
+where the Event, EventFrameImages, ExposureImages and HDRImages are newly generated. Please remember, you need to first download the original VOC dataset before this step. 
+
+
+
 
 ## Citation
 
