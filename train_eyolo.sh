@@ -1,0 +1,12 @@
+CUDA_VISIBLE_DEVICES=0 python train_eyolo.py -d voc --cuda -m E-yolo-tiny --ema --num_gpu 1 --batch_size 32 \
+                                                        --root path/to/dataset/\
+                                                        --lr 0.0005 \
+                                                        --img_size 320 \
+                                                        --max_epoch 50 \
+                                                        --lr_epoch 30 40 \
+                                                        --save_name EOLO-tiny_VOC_Underexposure_0.2_random42_1gpu_32bs_50epoch_SREF\
+                                                        --img_size 320\
+                                                        --data_type Exposure_Event\
+                                                        --exposure_factor Underexposure_0.2_random42\
+                                                        --fusion_method SREF\
+                                                        --use_wandb
