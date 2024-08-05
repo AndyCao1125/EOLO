@@ -44,6 +44,8 @@ pip install -r requirements.txt
 ```
 
 ## Training & Testing
+[Update August.5th] The checkpoint of EOLO in under-exposure scene in VOC is now released. You can download the checkpoint through [this link](https://drive.google.com/drive/folders/1Q9L7dzf82zRGWOyka3hnJqhTjKFn0Vog?usp=drive_link)
+
 Codes for training EOLO: 
 
 ```shell
