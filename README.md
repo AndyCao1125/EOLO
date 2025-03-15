@@ -43,8 +43,8 @@ cd EOLO
 pip install -r requirements.txt
 ```
 
-## Training & Testing
-[Update August.5th] The checkpoint of EOLO in under-exposure scene in VOC is now released. You can download the checkpoint through [this link](https://drive.google.com/drive/folders/1Q9L7dzf82zRGWOyka3hnJqhTjKFn0Vog?usp=drive_link)
+## Training
+**[Update 24.08.05]** The checkpoint of EOLO in under-exposure scene in VOC is now released. You can download the checkpoint through [this link](https://drive.google.com/drive/folders/1Q9L7dzf82zRGWOyka3hnJqhTjKFn0Vog?usp=drive_link)
 
 Codes for training EOLO: 
 
@@ -69,7 +69,24 @@ CUDA_VISIBLE_DEVICES=0 python train_eyolo.py \
      --use_wandb   
 ```
 
+## Visualization
 
+**[Update 25.03.15]** Codes for test EOLO's detection results:
+
+```shell
+python test_eyolo.py -d voc \
+        --cuda \
+        -m E-yolo-tiny  \
+        --weight EOLO_50_60.61.pth \
+        --img_size 320 \
+        --root path/to/dataset/ \
+        --save_name EOLO_results\
+        --data_type Exposure_Event\
+        --fusion_method AFNet_symetric_fusion_maxavgcat\
+        --exposure_factor Underexposure_0.2_random42 \
+        --visual_threshold 0.4  
+```
+Feel free to upload any images (RGB-E) you wish to be detected.
 
 ## Dataset Preparation
 ### Download VOC 2007 & 2012 dataset
@@ -140,4 +157,4 @@ If you find our work useful, please consider citing:
 ## Acknowledgements & Contact
 We thank the authors ([PyTorch_YOLO-Family](https://github.com/yjh0410/PyTorch_YOLO-Family)) for their open-sourced codes.
 
-For any help or issues of this project, please contact jcao248@connect.hkust-gz.edu.cn.
+For any help or issues of this project, please contact [Jiahang Cao](jcao248@connect.hkust-gz.edu.cn).
